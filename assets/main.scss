@@ -1,0 +1,53 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "{{ site.theme }}";
+
+.previous-next-post-links {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 0;
+    
+    $text-font-size--small: .8rem;
+    $text-font-size--medium: 1rem;
+    $text-font-size--large: 1.1rem;
+    
+    $text-font-size: $text-font-size--small;
+    $tertiary-info-font-size: 1.1 * $text-font-size;
+
+    font-size: $tertiary-info-font-size;
+
+    div {
+        width: 48%;
+    }
+
+    .align-right {
+        text-align: right
+    }
+
+    .align-left {
+        text-align: left
+    }
+
+    .arrow {
+        &::before, &::after {
+            display:inline-block;
+            text-decoration: none;
+        }
+    }
+
+    .arrow__left {
+        &::before {
+            content: "\2190";
+            padding-right: .3em;
+        }
+    }
+
+    .arrow__right {
+        &::after {
+            content: "\2192";
+            padding-left: .3em;
+        }
+    }
+}

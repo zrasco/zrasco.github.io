@@ -1,0 +1,24 @@
+---
+layout: post
+title: Page 3
+date: 2020-09-06 15:07
+category: 
+author: Zeb Rasco
+tags: []
+summary: 
+---
+
+# Post 3
+
+Finally, the last post. Here we are!
+
+![](/assets/2020-09-06-page3/2020-09-06-15-10-41.png)
+
+{% highlight ruby %}
+
+def print_hi(name)
+puts "Hi, #{name}"
+end print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+
+{% endhighlight %}
