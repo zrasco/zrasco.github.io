@@ -31,7 +31,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 disqus:
   shortname: zrasco
 github_username: zrasco
-linkedin_username: zeb-rasco-bb80a68
+linkedin_username: zrasco
 
 # Build settings
 theme: minima

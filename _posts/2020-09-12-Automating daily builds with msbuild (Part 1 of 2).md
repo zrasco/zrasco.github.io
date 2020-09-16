@@ -1,14 +1,16 @@
 ---
 layout: post
-title: Automating daily builds with msbuild and VS 2019
+title: Automating daily builds with msbuild and VS 2019 (Part 1/2) - Setting up automatic versioning
 date: 2020-09-12 14:10
-category: 
+category: Visual Studio 2019
 author: Zeb Rasco
-tags: []
+tags: [msbuild]
 summary: 
 ---
 
-For my first blog post, I'll review the strategy I used to automate daily builds for an UPS daemon I'm working on, HIDUPSResponder (will cover this in a future blog post).
+For my first blog post, we'll review the strategy I used to automate daily builds for an UPS daemon I'm working on, HIDUPSResponder (will cover this in a future blog post). We will use this approach and start from scratch with an example project called ExampleDaily.
+
+If you aren't interested in setting up daily builds and just want to add automatic versioning to your projects, you can skip to the [section on auto-versioning](#set-up-auto-versioning) and not concern yourself with WiX or Serilog.
 
 ## Rationale
 
@@ -114,6 +116,6 @@ Then, after a rebuild all command. Note that the revision number has increased a
 [11:17:37 INF] This is our example daily build program! Current version: 1.0.7563.20327
 ```
 
-## Notes/helpful hints
-
 ## Conclusion
+
+This is the approach I use to set up auto-versioning in my .NET Core 3.1 applications. In the next post, we'll use this example project as a foundation for automated daily builds. If you have any questions or feedback, please leave a comment. See you soon!
