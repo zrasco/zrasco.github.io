@@ -8,6 +8,8 @@ tags: [msbuild]
 summary: 
 ---
 
+The source code for this blog post can be [found in this repo.](https://github.com/zrasco/ExampleDaily)
+
 For my first blog post, we'll review the strategy I used to automate daily builds for an UPS daemon I'm working on, HIDUPSResponder (will cover this in a future blog post). We will use this approach and start from scratch with an example project called ExampleDaily.
 
 If you aren't interested in setting up daily builds and just want to add automatic versioning to your projects, you can skip to the [section on auto-versioning](#set-up-auto-versioning) and not concern yourself with WiX or Serilog.
