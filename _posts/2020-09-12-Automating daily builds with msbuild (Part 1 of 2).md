@@ -44,7 +44,7 @@ To get started, you'll need the following installed:
 
 ## Procedure
 
-For this example, we'll set up a basic Hello World project and accompying WiX project. We'll assume the reader is familiar with Visual Studio already, so not every single step will have an accompying screenshot.
+For this example, we'll set up a basic Hello World project and accompanying WiX project. We'll assume the reader is familiar with Visual Studio already, so not every single step will have an accompanying screenshot.
 
 First, make sure you install the WiX toolset and Visual Studio Extension. You'll have to restart Visual Studio for the changes to take effect.
 
@@ -70,7 +70,7 @@ Setting `<GenerateAssemblyInfo>` to false ensures that we don't have any future 
 
 #### Add some dependencies
 
-Now, let's add a dependency. We need at least one dependency to demonstrate that the build process will copy dependncies along with the executable. In this example, we'll install the Serilog.Sinks.Console NuGet package, using the package manager console (Tools->NuGet Package Manager->Package Manager Console):
+Now, let's add a dependency. We need at least one dependency to demonstrate that the build process will copy dependencies along with the executable. In this example, we'll install the Serilog.Sinks.Console NuGet package, using the package manager console (Tools->NuGet Package Manager->Package Manager Console):
 
 ```
 Install-Package Serilog.Sinks.Console -ProjectName ExampleDaily
