@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Automating daily builds with msbuild and VS 2019 (Part 1/2) - Setting up automatic versioning
+title: Automating daily builds with msbuild and VS 2019 (Part 1 of 2) - Setting up automatic versioning
 date: 2020-09-12 14:10
 category: Visual Studio 2019
 author: Zeb Rasco
@@ -8,7 +8,7 @@ tags: [msbuild]
 summary: 
 ---
 
-The source code for this blog post can be [found in this repo.](https://github.com/zrasco/ExampleDaily)
+The source code for this blog post can be [found in this repo.](https://github.com/zrasco/ExampleDaily/tree/part1)
 
 For my first blog post, we'll review the strategy I used to automate daily builds for an UPS daemon I'm working on, HIDUPSResponder (will cover this in a future blog post). We will use this approach and start from scratch with an example project called ExampleDaily.
 
@@ -31,28 +31,28 @@ In my case, I decided to create four different builds per deployment:
 
 In addition, such deployment packages can be set up for any configuration (Debug vs Release) and platform you choose (x86 and x64). Here is an example of the files produced for the x86 Release version:
 
-![x86 Release files screenshot](/assets/2020-09-12-Automating%20daily%20builds%20with%20msbuild/2020-09-12-14-27-42.png)'
+![x86 Release files screenshot](/assets/2020-09-12-automate-daily-builds-p1/2020-09-12-14-27-42.png)'
 
 And the x64 Debug version. Note the addition of "Debug" in the filenames:
 
-![x64 Debug files screenshot](/assets/2020-09-12-Automating%20daily%20builds%20with%20msbuild/2020-09-12-14-39-17.png)
+![x64 Debug files screenshot](/assets/2020-09-12-automate-daily-builds-p1/2020-09-12-14-39-17.png)
 
 ## Requirements
 
 To get started, you'll need the following installed:
-- [Visual Studio 2019 Community Edition (or greater)](https://visualstudio.microsoft.com/downloads/)
+- [Visual Studio 2019 Community Edition (or greater) w/ .NET Core 3.1 SDK](https://visualstudio.microsoft.com/downloads/)
 - [WiX toolset v3.11 (or greater)](https://wixtoolset.org/releases/)
-- [Wix Toolset Visual Studio 2019 Extension](https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension)
+- [Wix toolset Visual Studio 2019 Extension](https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension)
 
 ## Procedure
 
-For this example, we'll set up a basic Hello World project and accompanying WiX project. We'll assume the reader is familiar with Visual Studio already, so not every single step will have an accompanying screenshot.
+For this example, we'll set up a basic Hello World project using C# and .NET Core 3.1, and an accompanying WiX project. We'll assume the reader is familiar with Visual Studio already, so not every single step will have an accompanying screenshot.
 
 First, make sure you install the WiX toolset and Visual Studio Extension. You'll have to restart Visual Studio for the changes to take effect.
 
 Now, create an empty console project and name it ExampleDaily. Make sure the project and solution are NOT in the same directory.
 
-[![](/assets/2020-09-12-Automating%20daily%20builds%20with%20msbuild/2020-09-15-10-27-37.png)](/assets/2020-09-12-Automating%20daily%20builds%20with%20msbuild/2020-09-15-10-27-37.png)
+[![](/assets/2020-09-12-automate-daily-builds-p1/2020-09-15-10-27-37.png)](/assets/2020-09-12-automate-daily-builds-p1/2020-09-15-10-27-37.png)
 
 #### Set up auto-versioning
 You'll now end up with a typical empty project. Our first task is to enable auto-versioning by making our builds non-deterministic and generating the assembly info per build.
@@ -104,7 +104,7 @@ And replace your Main() function with this:
 
 When all is said and done, you should see something similar to the following:
 
-[![](/assets/2020-09-12-Automating%20daily%20builds%20with%20msbuild/2020-09-15-11-12-20.png)](/assets/2020-09-12-Automating%20daily%20builds%20with%20msbuild/2020-09-15-11-12-20.png)
+[![](/assets/2020-09-12-automate-daily-builds-p1/2020-09-15-11-12-20.png)](/assets/2020-09-12-automate-daily-builds-p1/2020-09-15-11-12-20.png)
 
 Now, run the program and verify everything is working correctly. You should see the correct version number. Here is mine:
 
@@ -118,6 +118,6 @@ Then, after a rebuild all command. Note that the revision number has increased a
 [11:17:37 INF] This is our example daily build program! Current version: 1.0.7563.20327
 ```
 
-## Conclusion
+# Conclusion
 
 This is the approach I use to set up auto-versioning in my .NET Core 3.1 applications. In the next post, we'll use this example project as a foundation for automated daily builds. If you have any questions or feedback, please leave a comment. See you soon!
