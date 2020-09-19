@@ -27,7 +27,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   and 2 5th gen Intel NUCs with 32GB of RAM apiece. I use it to test AD configurations
   which are meant to eventually work in production environments. Enjoy! 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: https://zrasco.github.io # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 disqus:
   shortname: zrasco
