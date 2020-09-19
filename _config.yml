@@ -20,8 +20,7 @@
 
 title: Zeb's lab
 tagline: My tech and software development blog
-author:
-  twitter: zeb_rasco
+author: Zeb Rasco
 email: zeb@zebslab.org
 description: >- # this means to ignore newlines until "baseurl:"
   This is my lab blog. I will post insights into my programming projects as well
@@ -31,6 +30,8 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://zrasco.github.io # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: zeb_rasco
+twitter:
+  username: zeb_rasco
 disqus:
   shortname: zrasco
 github_username: zrasco
