@@ -16,7 +16,7 @@ Obviously we don't want to have this kind of setup in a real environment, but ev
 
 # Setting up SSL certificates from Let's Encrypt
 
-This is where [Let's Encrypt](www.letsencrypt.org) comes into play. Once you purchase a domain from a registrar, you're able to purchase an SSL certificate from that registrar for an additional fee, typically one for each website. But Let's Encrypt is free! So let's use that instead.
+This is where [Let's Encrypt](http://www.letsencrypt.org) comes into play. Once you purchase a domain from a registrar, you're able to purchase an SSL certificate from that registrar for an additional fee, typically one for each website. But Let's Encrypt is free! So let's use that instead.
 
 Typically, we would set up certbot and use that to download the SSL certificates. However, in my case, I have a COX residential account and port 80 is blocked. Thus I was unable to use a normal HTTP challenge to authenticate my domain, zebslab.org. So I found out about another ACMEv2 client called dehydrated and decided to use that for a DNS-based challenge.
 
