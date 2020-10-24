@@ -18,15 +18,15 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Zeb's lab
+title: Zebs lab
 tagline: My tech and software development blog
 author: Zeb Rasco
 email: zeb@zebslab.org
 description: >- # this means to ignore newlines until "baseurl:"
-  This is my lab blog. I will post insights into my programming projects as well
+  This is my lab blog. I'll post insights into my programming projects as well
   as updates pertaining to my virtual esxi lab, which consists of a 17TB file server
   and 2 5th gen Intel NUCs with 32GB of RAM apiece. I use it to test AD configurations
-  which are meant to eventually work in production environments. Enjoy! 
+  which are meant to eventually work in production environments. Enjoy!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://zrasco.github.io # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: zeb_rasco
