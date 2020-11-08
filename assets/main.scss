@@ -22,6 +22,13 @@
         width: 48%;
     }
 
+    .bordered-text {
+        text-align: center;
+        border:1px;
+        border-style:solid;
+        border-color: lightgray;
+    }
+
     .align-right {
         text-align: right
     }

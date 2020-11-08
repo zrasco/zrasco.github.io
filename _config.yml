@@ -45,6 +45,12 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
+
+show_excerpts: true
+
+paginate: 1
+#paginate_path: "/posts/page:num/"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

@@ -14,7 +14,7 @@ We'll make the assumption that there is a pre-existing VCA appliance. As of this
 
 # Set up certificate trust store
 
-Before the VCA appliance will accept certificate renewals, we need to add both the root authority certificate and Let's Encrypt intermediate CA certificate to the VCA trust store. You can get them [here](https://letsencrypt.org/certificates/)
+Before the VCA appliance will accept certificate renewals, we need to add both the root authority certificate and Let's Encrypt intermediate CA certificate to the VCA trust store. You can get them [here](https://letsencrypt.org/certificates/).
 
 To complete the the trust chain, I used the following certificates:
 
