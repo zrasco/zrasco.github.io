@@ -16,7 +16,7 @@ layout: default
           </a>
         </h3>
         {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
+            {{ post.excerpt }}
         {%- endif -%}
       </li>
       {%- endfor -%}
@@ -36,7 +36,7 @@ layout: default
     </div>
 
   {% for page in (1..paginator.total_pages) %}
-  <div class="bordered-text">
+  <div class="page-number">
     {% if page == paginator.page %}
       <em>{{ page }}</em>
     {% elsif page == 1 %}

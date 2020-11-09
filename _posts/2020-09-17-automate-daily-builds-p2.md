@@ -8,9 +8,9 @@ tags: [msbuild]
 summary: 
 ---
 
-The source code for this blog post can be [found in this repo.](https://github.com/zrasco/ExampleDaily/tree/part2)
-
 In my [last post]({% post_url 2020-09-12-automate-daily-builds-p1 %}), we set up automatic versioning for an example .NET Core 3.1 project. We'll now build on this example project and create deployment packages.
+
+The source code for this blog post can be [found in this repo.](https://github.com/zrasco/ExampleDaily/tree/part2)
 
 # Overview
 
