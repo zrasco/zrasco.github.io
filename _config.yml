@@ -19,7 +19,6 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Zebs lab
-title-img: /assets/zebslab-logo2.png
 tagline: My tech and software development blog
 author: Zeb Rasco
 email: zeb@zebslab.org
