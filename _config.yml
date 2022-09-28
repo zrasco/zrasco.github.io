@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-#title: Zebs lab
+title: Zebs lab
 title-img: /assets/zebslab-logo2.png
 tagline: My tech and software development blog
 author: Zeb Rasco
