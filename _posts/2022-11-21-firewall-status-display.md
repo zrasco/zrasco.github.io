@@ -288,25 +288,41 @@ The limitations of such an approach are possible delays in retrieving Geolocatio
 
 ### More dashboards & alerts
 
+The dashboards that are presently in the application were put in during the time allowed to show the basic functionality and are not as flexible as they could be. For example, filters could be added to the dashboards to allow a finer-grained look into the data. In addition, the graphs could be further customized to allow different axes of data or time periods to be displayed. Finally, there is no general-purpose ad-hoc report module, which would allow various types of graphs and reports to be created, templates to be saved, and so on. Therefore there is much development potential in this area of the application.
 
-#### Add filtering capability to dashboards
-#### Add further customization for types of alerts
+The same can be said with alerts. While it was my intention to include more than 1 type of alert (currently port scans), time ran short and thus port scan alerts are the only type available. Furthermore, this type of alert is minimally customizable (it can be tweaked in appsettings.json). Further types of alerts can be added via an alert management module which abstracts the types of data flows triggering such alerts. Parameters such as types of packets, frequency of packets, size, etc... can all be input as parameters into this module and custom alerts can be created which the user determines would require some type of immediate action.
+
 ### Hints for IPTables rules based on pertinent traffic
+
+While the program acts as a view-only, the fact that it uses iptables logs also potentially provides the capability of outputting iptables commands which will further mitigate detected threats. For example, with the geolocation database there is the potential to automatically generate a script consistenting of iptables commands which will block entire countries. Another possible scenario is if patterns of port scans are detected, to discard all packets from these IP addresses and any associated Autonomous Systems (AS's). The iptables command-line interface is nearly universal across all platforms that support it and thus the program has the potential to suggest helpful commands to the user to strengthen their security posture.
+
 ### Also log allowed & rejected traffic 
+
+The implementation presented in this current body of work logs dropped traffic only. This is for several reasons:
+- Dropped traffic is typically already logged with minimal customization
+- Logging allowed/rejected traffic substantially increases overhead and customization requirements
+- Such logging is implementation-specific
+
+Each flavor of the custom firmware, as well as Ubuntu Linux, have optimal mechanisms for logging this type of traffic and each requires specific customization. However, despite the increased difficulty, the main benefit is that this sort of logging can alert the user to a focused attack. Examples include bruteforce attempts, SYN floods and other similar types of DoS attacks, and many more. The user can then take appropriate action to mitigate the attack. Combined with the suggested iptables hints rules mentioned above, this may give even an inexperienced user the ability to stop an ongoing attack with relative ease.
+
 ## Conclusion
-### So why bother using this?
-#### There are other potential good solutions to tackle this problem but this fulfills a niche
-#### Further investment in hardware not usually required if already able to run OpenWrt, DD-WRT, or Linux as a router
-#### Runs on Windows 10 with over 75% market share
-#### Alerts appear in the system tray almost in real-time
-#### High functionality out-of-the-box, minimal customization
-#### Relatively low prerequisites and requirements
-### Solution is ideal for intermediate to advanced users who want a working solution quickly without much tinkering
+
+We'll wrap things up with a summary of why this program is useful, the advantages/disadvantages of using it, and which needs it fulfills.
+
+Yes, there are other products that can fulfill this task that are out there. However, there are none (as of the time of this writing) that fulfill this specific niche/task. This program is designed to do one thing and do it well... report firewall activity for a large body of existing, inexpensive infrastructure that is already out there. With minimal setup requirements and configuration compared to other solutions, this application satisfies the need for a user to hit the ground running quickly with minimal hassle. It reports firewall data and does not seek to do anything else.
+
+Further hardware investment is not typically required, provided the user has a router that can receive custom firmware such as DD-WRT. VM infrastructure does not need to be provisioned for virtual appliances. The program is open-source and can be adapted by any competent person willing to add features. It runs on Windows 10 which has a high market share of the desktop market, which also allows desktop integration features such as notifications/alerts. There is minimal configuration required, and the main features of the program work out-of-the-box. The system requirements are modest, requiring only SQL Server (with support for other relational databases and/or a database-less option later), the .NET 6 runtime, and a mere 150MB of disk space.
+
+In summary, I argue this program fits a need for the target audience of intermediate to advanced users who want to monitor their firewall activity inexpensively, quickly, and effectively with minimal headaches. It ultimately aims to fulfill the niche it's intended to serve and I believe this work is a promising start and has strong future potential.
+
 ## References
 Vailshery, L. S. (2022, November 22). IOT connected devices worldwide 2019-2030. Statista. Retrieved November 22, 2022, from https://www.statista.com/statistics/1183457/iot-connected-devices-worldwide/ 
 
 Zou, X. (2022, August 18). IOT devices are hard to patch: Here's why-and how to deal with security. TechBeacon. Retrieved November 22, 2022, from https://techbeacon.com/security/iot-devices-are-hard-patch-heres-why-how-deal-security 
 
 Desktop windows version market share worldwide. StatCounter Global Stats. (2022, October). Retrieved November 23, 2022, from https://gs.statcounter.com/os-version-market-share/windows/desktop/worldwide 
+
+## Source code snippets used
+
 
 ## Appendix
