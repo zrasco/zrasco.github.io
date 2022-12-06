@@ -238,6 +238,64 @@ I'm going to evaluate requirements & setup against other solutions. Here they ar
 - Splunk
 - Alienvault OSSIM
 
+During the evaluation I set an upper bound time limit of 3 hours of configuration effort per product. While I'm convinced all of these could eventually work, 3 hours seems sufficient to form a basis of comparison to my own solution (which takes around a half hour to set up total).
+
+#### Graylog
+
+I have an existing graylog instance in my environment which I use for other tasks. When doing my initial research it seemed as though Graylog could support firewall data in a similar fashion so I decided to see if it were possible.
+
+The initial setup and configuration of Graylog was done in the past and took approximately 8 hours. At first I did install the Graylog downloadable virtual appliance, but then decided to install the server onto an existing Linux VM. This VM has 2 CPU cores, 8GB of RAM and approximately 700GB of SSD storage (I use this as a file server as well), 200GB of which is dedicated to Graylog logs.
+
+Unfortunately, I ran into similar issues as with Alienvault OSSIM (please see next section). While I was able to set up the firewall as an event source, forward packet data to Graylog, and show the raw data on the screen, this was as far as I could go. While there does appear to be support for certain types of vendor firewalls in Graylog via third party dashboards (such as Palo Alto) coupled with Graylog's paid Enterprise product, Graylog does not seem to have a parser for breaking iptables firewall data up into discrete fields.
+
+In conclusion I was not able to find the correct set of criteria needed to successfully integrate iptables logs into Graylog in any fashion beyond simply displaying the raw log output in a dashboard. While this may be possible, the time needed to set up Graylog (over 8 hours) was already well above the time needed to set up my own solution and thus we have evaluated Graylog according to the scope of the evaluation framework.   
+
+[![](/assets/2022-11-21-firewall-status-display/2022-12-04-19-14-21.png)](/assets/2022-11-21-firewall-status-display/2022-12-04-19-14-21.png)
+
+
+#### Splunk
+
+I opted for the 1.4GB Splunk OVA (virtual appliance) to attempt a quick evaluation, which required me to create an account. This is essentially a virtual machine image which is designed to quickly drop into an existing VMWare environment. It's typically pre-configured and runs out of the box without much setup needed.
+
+Immediately I was faced with an issue, the Splunk OVA required 8 CPUs but my ESXI host only has 4. Despite changing the VM settings to 4 CPU cores, I continued to receive errors regarding a lack of CPU resources and was ultimately unable to get it working. The only host I have with 8 CPU cores is my Hyper-V server, which unfortunately rules out the possibility of using an OVA appliance (there are ways to convert from OVA to a Hyper-V hard disk but it seems an install from scratch is more sensible as there may be unforeseen consequences of the OVA conversion).
+
+I was ultimately able to install Splunk on a Hyper-V VM.
+
+Setup of the VM and Splunk itself was relatively simple. After this, I redirected the router syslog to UDP port 514 of the splunk VM and attempted to install the IPTables Netfilter visualization app, and it's dependencies, the TA_netfilter app and the Splunk CIM app, into Splunk to show a visualization of the firewall data.Unfortunately, the app did not show the initial setup screen when ran.
+
+I uninstalled the app and made another attempt installing both the IPTables app and TA_netfilter using the GUI tool. After about 45 minutes, I was able to get a dashboard up with some basic firewall information such as packet volume over time, port numbers, and so forth. However, IP and Geolocation information was still absent so I worked to configure these as well. I was able to determine the logical splunk fields were not being parsed and populated correctly (such as clientip, country, city, and so forth) so I worked on this. The issue appears to be rooted in the TA_netfilter dependency.
+
+After much trial-and-error I was able to determine that TA_netfilter is not outputting fields into the new event source that are required by the IPtables Netfilter Splunk app. I spent time reviewing the documentation for both apps and still was not able to retrieve the relevant fields needed to show geolocation and IP address information as needed by the dashboards. At this point I have hit the 3 hour mark and have at least partial success, so I consider this a sufficient attempt for the purposes of this evaluation. I do believe it's possible to get the Geolocation and IP address information correctly in the dashboards, but was not able to determine how to do so in the 3 hour window.
+
+[![](/assets/2022-11-21-firewall-status-display/2022-12-06-12-08-46.png)](/assets/2022-11-21-firewall-status-display/2022-12-06-12-08-46.png)
+
+
+#### Alienvault OSSIM
+
+To set up AlienVault OSSIM 5.8.11, I provisioned a VM in line with the recommended requirements: 2 CPU cores, 8GB of RAM and 128GB of SSD space. I installed it on an ESXI host using a Debian 8 64-bit profile.
+
+During installation, it hung during the step displaying "Configuring alienvault-gvm11-feed (amd64)". I was finally able to go online and figure out a way to make the installation proceed, but had I left it alone it may have ended there. Total installation time to first boot logon screen took about 26 minutes.
+
+Initial configuration took around 6 minutes and was straightforward. I had to configure the network interfaces and discovered devices. I determined that my router was not in the list of discovered devices and attempted to add it as an event source.
+
+I reconfigured my router to send UDP syslog packets to the AlienVault OSSIM VM and used the AlienVault OSSIM troubleshooting tools (netstat and syslog) to confirm the packets were being received by AlienVault's VM. However, they would not show up in the web interface. I spent about 2 more hours of research to figure out a way to incorporate these packets into the UI, but was unsuccessful.
+
+Additionally, I looked into the various dashboards available and could find none that showed the Geolocation or port information for firewall packets. Built-in dashboards only show generic information such as authentication, authorization, and so forth. While this additional insight may ultimately be somehow available, I was not able to find it during the evaluation period.
+
+I'm therefore forced to conclude that while AlienVault OSSIM may be a viable all-purpose solution for many types of threats, it does not have specific firewall insight capabilities out of the box. I suspect that doing so would require a large degree of customization, possibly into the realm of setting up an unsupported configuration. However, I am not an expert in AlienVault OSSIM so it's possible I might have missed something.
+
+Time spent for this evaluation: Approximately 3 hours. Result: Inconclusive, but likely not supported.
+
+#### IPFire
+
+I will briefly mention IPFire because it contains similar features and can even act as an IPS. However, because of the hardware requirements, IPFire is not a direct competitor in terms of this evaluation. That said, I fully endorse IPFire as an alternative solution to my project, provided the reader has adequate physical equipment. 
+
+### Pt.3 - Vs different solutions (summary)
+
+Of all 3 solutions, the only one I was able to get partially working in the time alloted was Splunk. It also seemed possible to do so with Graylog, but unlike Splunk, there was no out-of-the-box log parser available for syslog-style iptables log entries. Such a parser may be available or can be created, but I was unable to find it, and obviously creating one would go well beyond the evaluation constraints. As for AlienVault OSSIM either does not support this type of reporting environment at all, or would do so only after heavy customization which would include custom log ingestion, creation of data adapters, creation of visualization dashboards, custom geolocation integration, and so forth.
+
+In addition, the infrastructure requirements for all 3 comparable solutions involve provisioning a separate VM of varying configurations, which require more time (sometimes setting up an OS) and which requires more infrastructure than my project, which will install on a Windows 10 machine in a matter of minutes and work basically out-of-the-box. Thus based on this evaluation I conclude and state that my application fulfills the needs/goals set out in the design, specifically, to provide a feature-rich solution with minimal effort compared to other solutions.
+
 ## Limitations
 
 Limitations of the solution are mostly obvious. They arise from the deadline to project completion, the scope of the project itself (this program won't make your coffee), and it's purpose to fulfill a niche need. We'll go over some of the specific limitations now.
@@ -267,6 +325,9 @@ Finally, one can only view the data in the program and it therefore offers no re
 ## Future work
 
 We'll now discuss future work, which I believe there is a lot of potential for. Not only have there been many good suggestions from my colleagues, but even many of my own ideas were not implemented simply due to the time constraint. This program still has potential for further development and this version is simply a base example of what could be done in the time allowed.
+
+### Further evaluation against other comparable products
+Because this project fulfills such a niche, it has proven difficult to find an apples-to-apples product to evaluate this against. I have made a best-effort attempt to do so, however, my lack of finding an exact product to compare to does not necessarily indicate such a product doesn't exist. Further research is possible to find similar products which may result in a more detailed comparison.
 
 ### Support for multiple RDBMS
 
@@ -323,6 +384,18 @@ Zou, X. (2022, August 18). IOT devices are hard to patch: Here's why-and how to 
 Desktop windows version market share worldwide. StatCounter Global Stats. (2022, October). Retrieved November 23, 2022, from https://gs.statcounter.com/os-version-market-share/windows/desktop/worldwide 
 
 ## Source code snippets used
+
+## Instructions/sources used for evaluation
+
+Alienvault installation instructions: https://cybersecurity.att.com/documentation/usm-appliance/initial-setup/ossim-installation.htm
+
+Graylog installation instructions & links to virtual appliances: https://docs.graylog.org/docs/installing
+
+Spunk OVA for VMWare: https://splunkbase.splunk.com/app/3216
+
+Installation of Splunk on Ubuntu Linux: https://www.bitsioinc.com/install-splunk-ubuntu/
+
+IPtables for Splunk: https://readthedocs.org/projects/iptables-for-splunk/downloads/pdf/latest/
 
 
 ## Appendix
