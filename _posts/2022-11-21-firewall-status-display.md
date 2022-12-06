@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 
+title: Firewall Status Display - MS Final Practicum Project
 date: 2022-11-21 16:36
 category: 
 author: Zeb Rasco
@@ -16,9 +16,9 @@ Author: Zeb Rasco.
 Date: 11/22/2022*
 
 ## Background
-Home routers are a prevalent part of today's internet ecosystem. Home internet packages from ISPs typically have a router included, or a router/modem combination. A typical home user will have multiple devices which need internet access, such as smart TV's, phones, tablets, computers, and various Internet of Things (IoT) devices such as cameras and smart appliances. A router is required for multiple devices to connect to a single internet connection, and virtually all modern routers also include a wireless access point for wireless devices. This direction technology has taken has resulted in a very large amount of routers existing in the world today, which serve as the bridge between a private home network and the public internet.
+Home routers are a prevalent part of today's internet ecosystem. Home internet packages from ISPs typically have a router included, or a router/modem combination. A typical home user will have multiple devices which need internet access, such as smart TV's, phones, tablets, computers, and various Internet of Things (IoT) devices such as cameras and smart appliances. A router is required for multiple devices to connect to a single internet connection, and virtually all modern routers also include a wireless access point for wireless devices. This direction of technology has resulted in a very large amount of routers exposed as public IP addresses, which serve as the bridge between a private home network and the public internet.
 
-IoT devices are prevalent in today's world with an estimated 11.28 billion devices in 2021 and are projected to almost triple to 29.42 billion devices by 2030 *(Vailshery, IOT connected devices worldwide 2019-2030 2022)*. In addition, IoT devices often run on proprietary embedded systems and vulnerabilities which are difficult to patch, if a patch is even available at all *(Zou, IOT devices are hard to patch: Here's why-and how to deal with security 2022)*.
+IoT devices are also prevalent in today's world, with an estimated 11.28 billion devices in 2021, and are projected to almost triple to 29.42 billion devices by 2030 *(Vailshery, IOT connected devices worldwide 2019-2030 2022)*. In addition, IoT devices often run on proprietary embedded systems and may have vulnerabilities which are difficult to patch, if a patch is even available at all *(Zou, IOT devices are hard to patch: Here's why-and how to deal with security 2022)*.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-22-18-37-33.png)](/assets/2022-11-21-firewall-status-display/2022-11-22-18-37-33.png)
 <sub><sup>Fig. 1 - Projected growth of IoT devices over the next 10 years (Vailshery, 2022).</sup></sub>
@@ -89,47 +89,54 @@ Each of these application areas can be navigated by clicking the corresponding n
 This is the default view of the program and will group dropped firewall packets by their country of origin. There is a conveniently placed sortable and filterable datagrid to view this information in more detail.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-23-20-33-07.png)](/assets/2022-11-21-firewall-status-display/2022-11-23-20-33-07.png)
+<sub><sup>Fig. 3 - Traffic by country dashboard.</sup></sub>
 
 #### Status dashboard - Traffic by port
 
 This layout is similar to the previous section, but instead shows traffic by port number. This is useful for identifying common attack vectors used by adversaries.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-23-20-59-07.png)](/assets/2022-11-21-firewall-status-display/2022-11-23-20-59-07.png)
+<sub><sup>Fig. 4 - Traffic by port dashboard.</sup></sub>
 
 #### Status dashboard - Port scans
 
 As in the previous 2 layouts, port scan activity is available in the accompanying data grid. There is also a chart showing trends of port scan activity over time, where spikes may possibly indicate a coordinated attack from a focused adversary instead of a random sweep from an adversary scanning swaths of IP addresses. When a port scan is detected, it is added to the list and an alert is given to the user via the notification feature native to Windows 10.
 
-[![](/assets/2022-11-21-firewall-status-display/2022-11-23-21-00-53.png)](/assets/2022-11-21-firewall-status-display/2022-11-23-21-00-53.png)
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-10-18-49.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-10-18-49.png)
+<sub><sup>Fig. 5 - Port scan dashboard showing alert of recent port scan.</sup></sub>
 
 #### Status dashboard - Statistics
 
 This last pane of the status dashboard shows general firewall statistics. IP geolocation information utilizes an LRU cache for fast lookups. As you can see from the output I have a lot of days worth of data and do plan on cleaning this up...
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-23-21-35-02.png)](/assets/2022-11-21-firewall-status-display/2022-11-23-21-35-02.png)
-
+<sub><sup>Fig. 6 - Statistics dashboard.</sup></sub>
 
 #### Syslog output
 
 This section of the application shows the raw syslog output. This can be useful for debugging purposes and can also be used to check non-iptables related logs, if needed.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-10-03-50.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-10-03-50.png)
+<sub><sup>Fig. 7 - Raw syslog output.</sup></sub>
 
 #### Firewall log
 
 Here we can see the actual firewall log entries arranged in a data grid. This grid allows filtering and sorting, which enables the user to quickly drill down into specific information.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-10-08-16.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-10-08-16.png)
+<sub><sup>Fig. 8 - Parsed firewall data.</sup></sub>
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-10-09-05.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-10-09-05.png)
+<sub><sup>Fig. 9 - Parsed firewall data with active filter.</sup></sub>
 
 #### Settings
 
 Finally, in the settings area we can see the top part of the layout contains application-specific information. The user can see the status/health of the application and take action necessary.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-10-10-17.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-10-10-17.png)
+<sub><sup>Fig. 10 - Settings view, database properties.</sup></sub>
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-10-10-52.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-10-10-52.png)
+<sub><sup>Fig. 11 - Settings view, geolocation import feature.</sup></sub>
 
 #### Database tables
 
@@ -139,11 +146,13 @@ Now that we've covered the application itself, we'll take a quick tour of the tw
 First we see the table of firewall log entries which are used in the application. This persistent storage approach allows the application to still use the historical data in the event it is restarted. The careful reader will notice the Geolocation entries are not normalized; this is due to the fact that IP addresses change location over time. However, I am exploring the possibility of adding at least one more table to further normalize the database.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-25-10-06-34.png)](/assets/2022-11-21-firewall-status-display/2022-11-25-10-06-34.png)
+<sub><sup>Fig. 12 - MS SQL Server Management Studio showing firewall entries.</sup></sub>
 
 ##### Geolocation table
 This is where we find mappings of IP address ranges to geolocation data. I chose to use this in lieu of a cloud-based web API due to rate limits and other considerations. However, in the future I do plan on implementing a database-less approach to this.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-25-10-24-58.png)](/assets/2022-11-21-firewall-status-display/2022-11-25-10-24-58.png)
+<sub><sup>Fig. 13 - MS SQL Server Management Studio showing geolocation entries.</sup></sub>
 
 
 ## Evaluation
@@ -162,6 +171,7 @@ We'll examine various aspects of the data in more detail and attempt to draw som
 Using the geolocation information in the database, we're able to see where this traffic originates from. 
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-24-11-19-00.png)](/assets/2022-11-21-firewall-status-display/2022-11-24-11-19-00.png)
+<sub><sup>Fig. 14 - Traffic by country showing relevant data.</sup></sub>
 
 Here is the table corresponding to the top 10 origin countries:
 |Country|Packets|Percentage of traffic|
@@ -186,6 +196,7 @@ The value of this data is being able to mitigate swaths of attacks by blocking a
 The application provides a similar breakdown of traffic by port, which we will review here.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-25-12-52-20.png)](/assets/2022-11-21-firewall-status-display/2022-11-25-12-52-20.png)
+<sub><sup>Fig. 15 - Traffic by port showing relevant data.</sup></sub>
 
 Here is the table of top 5 ports:
 |Service Name|Port|Packets|Percentage|
@@ -213,6 +224,7 @@ This was the native development platform and thus all contingencies for this wer
 Setup was straightforward, OpenWRT has the firewall enabled by default with a relatively strict filtering policy. I needed only to enable firewall logging using the web interface, and then enable remote syslog using SSH to change a configuration file. Packets logged in such a fashion have an input interface name of "wan" and a ""DROP" tag.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-25-16-37-14.png)](/assets/2022-11-21-firewall-status-display/2022-11-25-16-37-14.png)
+<sub><sup>Fig. 16 - OpenWRT sample entries.</sup></sub>
 
 
 #### DD-WRT
@@ -222,6 +234,7 @@ DD-WRT logs the firewall packets by default and needed only to be configured to 
 Like OpenWRT, all packets from the DD-WRT router have a "DROP" tag. It can be differentiated from OpenWRT by the interface name of "vlan2".
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-25-16-38-01.png)](/assets/2022-11-21-firewall-status-display/2022-11-25-16-38-01.png)
+<sub><sup>Fig. 17 - DD-WRT sample entries.</sup></sub>
 
 
 #### Ubuntu Linux
@@ -230,15 +243,19 @@ I used Ubuntu Linux 22.04 for this demonstration. As I was not able to procure p
 Setup of the Ubuntu Linux firewall logging was similar to setting it up with DD-WRT. I enabled the firewall using the ufw command and it immediately logged to the local syslog. After that, I set up remote logging using a configuration file and it worked pretty well. The only tweak I had to do was add a regular expression to check for the tag, which was "[UFW BLOCK]". The interface name was "eth0" as I had assigned the first virtual NIC to the WAN port.
 
 [![](/assets/2022-11-21-firewall-status-display/2022-11-25-16-40-38.png)](/assets/2022-11-21-firewall-status-display/2022-11-25-16-40-38.png)
+<sub><sup>Fig. 18 - Ubuntu Linux UFW sample entries.</sup></sub>
 
 
 ### Pt. 3 - Vs different solutions
+
 I'm going to evaluate requirements & setup against other solutions. Here they are:
 - Graylog
 - Splunk
 - Alienvault OSSIM
 
 During the evaluation I set an upper bound time limit of 3 hours of configuration effort per product. While I'm convinced all of these could eventually work, 3 hours seems sufficient to form a basis of comparison to my own solution (which takes around a half hour to set up total).
+
+In addition, all system requirements can be found in the References section.
 
 #### Graylog
 
@@ -248,10 +265,10 @@ The initial setup and configuration of Graylog was done in the past and took app
 
 Unfortunately, I ran into similar issues as with Alienvault OSSIM (please see next section). While I was able to set up the firewall as an event source, forward packet data to Graylog, and show the raw data on the screen, this was as far as I could go. While there does appear to be support for certain types of vendor firewalls in Graylog via third party dashboards (such as Palo Alto) coupled with Graylog's paid Enterprise product, Graylog does not seem to have a parser for breaking iptables firewall data up into discrete fields.
 
-In conclusion I was not able to find the correct set of criteria needed to successfully integrate iptables logs into Graylog in any fashion beyond simply displaying the raw log output in a dashboard. While this may be possible, the time needed to set up Graylog (over 8 hours) was already well above the time needed to set up my own solution and thus we have evaluated Graylog according to the scope of the evaluation framework.   
+In conclusion, I was not able to find the correct set of criteria needed to successfully integrate iptables logs into Graylog in any fashion beyond simply displaying the raw log output in a dashboard. While this may be possible, the time needed to set up Graylog (over 8 hours initially and 3 additional hours during this evaluation) was already well above the time needed to set up my own solution and thus we have evaluated Graylog according to the scope of the evaluation framework.   
 
 [![](/assets/2022-11-21-firewall-status-display/2022-12-04-19-14-21.png)](/assets/2022-11-21-firewall-status-display/2022-12-04-19-14-21.png)
-
+<sub><sup>Fig. 19 - Example Graylog dashboard using Palo Alto.</sup></sub>
 
 #### Splunk
 
@@ -259,16 +276,18 @@ I opted for the 1.4GB Splunk OVA (virtual appliance) to attempt a quick evaluati
 
 Immediately I was faced with an issue, the Splunk OVA required 8 CPUs but my ESXI host only has 4. Despite changing the VM settings to 4 CPU cores, I continued to receive errors regarding a lack of CPU resources and was ultimately unable to get it working. The only host I have with 8 CPU cores is my Hyper-V server, which unfortunately rules out the possibility of using an OVA appliance (there are ways to convert from OVA to a Hyper-V hard disk but it seems an install from scratch is more sensible as there may be unforeseen consequences of the OVA conversion).
 
-I was ultimately able to install Splunk on a Hyper-V VM.
+I was ultimately able to install Splunk on a Hyper-V VM, and gave it 4 CPU cores, 128GB of SSD space, and 8GB of RAM.
 
-Setup of the VM and Splunk itself was relatively simple. After this, I redirected the router syslog to UDP port 514 of the splunk VM and attempted to install the IPTables Netfilter visualization app, and it's dependencies, the TA_netfilter app and the Splunk CIM app, into Splunk to show a visualization of the firewall data.Unfortunately, the app did not show the initial setup screen when ran.
+Setup of the VM and Splunk itself was relatively simple. After this, I redirected the router syslog to UDP port 514 of the splunk VM and attempted to install the IPTables Netfilter visualization app, and it's dependencies, the TA_netfilter app and the Splunk CIM app, into Splunk to show a visualization of the firewall data. Unfortunately, the app did not show the initial setup screen when ran.
 
 I uninstalled the app and made another attempt installing both the IPTables app and TA_netfilter using the GUI tool. After about 45 minutes, I was able to get a dashboard up with some basic firewall information such as packet volume over time, port numbers, and so forth. However, IP and Geolocation information was still absent so I worked to configure these as well. I was able to determine the logical splunk fields were not being parsed and populated correctly (such as clientip, country, city, and so forth) so I worked on this. The issue appears to be rooted in the TA_netfilter dependency.
 
 After much trial-and-error I was able to determine that TA_netfilter is not outputting fields into the new event source that are required by the IPtables Netfilter Splunk app. I spent time reviewing the documentation for both apps and still was not able to retrieve the relevant fields needed to show geolocation and IP address information as needed by the dashboards. At this point I have hit the 3 hour mark and have at least partial success, so I consider this a sufficient attempt for the purposes of this evaluation. I do believe it's possible to get the Geolocation and IP address information correctly in the dashboards, but was not able to determine how to do so in the 3 hour window.
 
-[![](/assets/2022-11-21-firewall-status-display/2022-12-06-12-08-46.png)](/assets/2022-11-21-firewall-status-display/2022-12-06-12-08-46.png)
+Additionally, I ran into frequent warnings about Splunk crossing resource thresholds, due to my relatively under-provisioned VM. A full Splunk installation is recommended to have at least 32 CPU cores and a whopping 128GB of RAM!
 
+[![](/assets/2022-11-21-firewall-status-display/2022-12-06-12-08-46.png)](/assets/2022-11-21-firewall-status-display/2022-12-06-12-08-46.png)
+<sub><sup>Fig. 20 - Partial Splunk dashboard achieved in the evaluation.</sup></sub>
 
 #### Alienvault OSSIM
 
@@ -292,9 +311,9 @@ I will briefly mention IPFire because it contains similar features and can even 
 
 ### Pt.3 - Vs different solutions (summary)
 
-Of all 3 solutions, the only one I was able to get partially working in the time alloted was Splunk. It also seemed possible to do so with Graylog, but unlike Splunk, there was no out-of-the-box log parser available for syslog-style iptables log entries. Such a parser may be available or can be created, but I was unable to find it, and obviously creating one would go well beyond the evaluation constraints. As for AlienVault OSSIM either does not support this type of reporting environment at all, or would do so only after heavy customization which would include custom log ingestion, creation of data adapters, creation of visualization dashboards, custom geolocation integration, and so forth.
+Of all 3 solutions, the only one I was able to get partially working in the time alloted was Splunk. It also seemed possible to do so with Graylog, but unlike Splunk, there was no out-of-the-box log parser available for syslog-style iptables log entries. Such a parser may be available or can be created, but I was unable to find it, and obviously creating one would go well beyond the evaluation constraints. As for AlienVault OSSIM, either it doesn't support this type of reporting environment at all, or would do so only after heavy customization which would include custom log ingestion, creation of data adapters, creation of visualization dashboards, custom geolocation integration, and so forth.
 
-In addition, the infrastructure requirements for all 3 comparable solutions involve provisioning a separate VM of varying configurations, which require more time (sometimes setting up an OS) and which requires more infrastructure than my project, which will install on a Windows 10 machine in a matter of minutes and work basically out-of-the-box. Thus based on this evaluation I conclude and state that my application fulfills the needs/goals set out in the design, specifically, to provide a feature-rich solution with minimal effort compared to other solutions.
+In addition, the infrastructure requirements for all 3 comparable solutions involve provisioning a separate VM of varying configurations, which require more time (sometimes setting up an OS) and which requires more infrastructure than my project, which will install on a Windows 10 machine in a matter of minutes and work basically out-of-the-box. Thus based on this evaluation I conclude and state that my application fulfills the needs/goals set out in the design; specifically, to provide a feature-rich firewall reporting solution with minimal effort, compared to other solutions.
 
 ## Limitations
 
@@ -397,5 +416,10 @@ Installation of Splunk on Ubuntu Linux: https://www.bitsioinc.com/install-splunk
 
 IPtables for Splunk: https://readthedocs.org/projects/iptables-for-splunk/downloads/pdf/latest/
 
+Splunk system requirements (32 CPU cores, 128GB RAM, SSD): https://docs.splunk.com/Documentation/DSP/1.3.1/Admin/Compatibility
+
+Graylog system requirements (4 CPU cores, 8GB RAM, SSD): https://assets-global.website-files.com/5e9fae47f9a5b161fc3f7024/5f37e9b37e418d596937eacb_Graylog%20-%20Graylog%20Enterprise%20Datasheet.pdf
+
+Alienvault OSSIM system requirements (2 CPU cores, 4-8GB RAM, 50GB SSD): https://cybersecurity.att.com/documentation/usm-appliance/initial-setup/ossim-installation.htm
 
 ## Appendix
